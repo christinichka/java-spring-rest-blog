@@ -6,7 +6,4 @@ import org.springframework.data.rest.core.event.ValidatingRepositoryEventListene
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.validation.*;
 
-public class RestConfig {
-
-
-}
+public class RestConfig {}
