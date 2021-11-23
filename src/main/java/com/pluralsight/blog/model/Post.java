@@ -1,16 +1,20 @@
 package com.pluralsight.blog.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Post {
@@ -24,7 +28,10 @@ public class Post {
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     private Date date;
-
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Author author;
+	
     public Post() {
         super();
     }
@@ -72,7 +79,15 @@ public class Post {
         this.date = date;
     }
 
-    @Override
+    public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Post))
             return false;
@@ -81,3 +96,4 @@ public class Post {
                this.body.equals(otherPost.getBody());
     }
 }
+
